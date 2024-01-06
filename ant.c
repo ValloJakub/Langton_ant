@@ -3,6 +3,7 @@
 
 #include <pthread.h>
 #include <unistd.h>
+#include <conio.h>
 
 void *antThread(void *arg) {
     Ant *ant = (Ant *)arg;
@@ -23,6 +24,26 @@ void *antThread(void *arg) {
         pthread_mutex_lock(ant->mutex);
 
         displayWorld(world);
+
+        // Čítanie klávesnice asynchrónne
+        char c;
+        if(kbhit()){
+            c = getch();
+            printf("Simulation has been terminated.\n");
+
+            printf("Do you wish to save the world? [y/Y] [n/N]\n");
+            char input;
+            while (1) {
+                scanf(" %c", &input);
+                if (input == 'y' || input == 'Y') {
+                    printf("Saving..\n");
+                    saveWorldToFile(world, "world.txt");
+                    exit(EXIT_SUCCESS);
+                } else if (input == 'n' || input == 'N') {
+                    exit(EXIT_SUCCESS);
+                }
+            }
+        }
     }
     pthread_mutex_unlock(ant->mutex);
 

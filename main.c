@@ -3,7 +3,6 @@
 #include <pthread.h>
 #include <unistd.h>
 
-
 #include <sys/types.h>
 #include <winsock.h>
 
@@ -11,7 +10,7 @@ void create() {
     srand(time(NULL));
 
     World world;
-    world.stepLimit = 100;
+    world.stepLimit = 1500;
 
     pthread_mutex_t ant_mutex;
     pthread_mutex_init(&ant_mutex, NULL);
@@ -88,6 +87,7 @@ void create() {
     // Po skončení simulácie uloží svet do lokálneho súboru
     saveWorldToFile(&world, "world.txt");
 
+
     freeWorldMemory(&world);
 }
 
@@ -95,7 +95,7 @@ void load() {
     srand(time(NULL));
 
     World world;
-    world.stepLimit = 100;
+    world.stepLimit = 1500;
 
     pthread_mutex_t ant_mutex;
     pthread_mutex_init(&ant_mutex, NULL);
@@ -114,6 +114,7 @@ void load() {
     for (int i = 0; i < world.max_ants; i++) {
         pthread_join(antThreadIds[i], NULL);
     }
+
     freeWorldMemory(&world);
 }
 
@@ -121,10 +122,9 @@ int main() {
     printf("Type 'l', if you want to load world from a file.\n");
     printf("Type 'c', if you want to create your own map, that will be saved.\n");
 
-
     char input;
-    scanf(" %c", &input);
     while (1) {
+        scanf(" %c", &input);
         if (input == 'l' || input == 'L') {
             load();
             break;
@@ -132,9 +132,10 @@ int main() {
             create();
             printf("\nDo you want to save world on server? [y/Y] [n/N]");
             char input;
-            scanf(" %c", &input);
             while (1) {
+                scanf(" %c", &input);
                 if (input == 'y' || input == 'Y') {
+                    printf("Saving on server..\n");
                     //TODO : spojenie so serverom
                     break;
                 } else if (input == 'n' || input == 'N') {
