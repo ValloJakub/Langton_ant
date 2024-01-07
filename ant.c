@@ -29,17 +29,17 @@ void *antThread(void *arg) {
         char c;
         if(kbhit()){
             c = getch();
-            printf("Simulation has been terminated.\n");
+            printf("Simulation has been stopped.\n");
 
-            printf("Do you wish to save the world? [y/Y] [n/N]\n");
+            printf("Do you wish to save resume the simulation? [y/Y] [n/N]\n");
             char input;
             while (1) {
                 scanf(" %c", &input);
                 if (input == 'y' || input == 'Y') {
+                    break;
+                } else if (input == 'n' || input == 'N') {
                     printf("Saving..\n");
                     saveWorldToFile(world, "world.txt");
-                    exit(EXIT_SUCCESS);
-                } else if (input == 'n' || input == 'N') {
                     exit(EXIT_SUCCESS);
                 }
             }
