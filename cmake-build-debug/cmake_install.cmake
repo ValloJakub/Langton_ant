@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/jakub/OneDrive/Počítač/Langton
+# Install script for directory: C:/Users/jakub/OneDrive/Počítač/sdfg
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/jakub/OneDrive/Počítač/Langton/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/jakub/OneDrive/Počítač/sdfg/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

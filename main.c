@@ -2,10 +2,6 @@
 #include "ant.h"
 #include <pthread.h>
 #include <unistd.h>
-
-#include <sys/types.h>
-#include <winsock.h>
-
 void create() {
     srand(time(NULL));
 
@@ -22,12 +18,15 @@ void create() {
     if (size < 5) {
         printf("\nWorld is too small! Setting the size as default: 10");
         size = 10;
+    } else if (size > 30) {
+        printf("\nWorld is too large! Setting the size as default: 10");
+        size = 10;
     }
 
     printf("\nEnter the number of maximum ants: ");
     scanf("%d", &max_ants);
 
-    if (max_ants <= 0) {
+    if (max_ants <= 0 || max_ants > (size * size) / 2 ) {
         printf("\nInvalid input. Setting the amount of ants as default: 3");
         max_ants = 3;
         usleep(2000000);
@@ -87,7 +86,6 @@ void create() {
     // Po skončení simulácie uloží svet do lokálneho súboru
     saveWorldToFile(&world, "world.txt");
 
-
     freeWorldMemory(&world);
 }
 
@@ -145,39 +143,4 @@ int main() {
             return 0;
         }
     }
-
-/*
-    int sockfd, n;
-    struct sockaddr_in serv_addr;
-    struct hostent *server;
-
-    char buffer[256];
-    if (argc < 4) {
-        fprintf(stderr, "usage %s hostname port pattern_filename\n", argv[0]);
-        return 1;
-    }
-
-    server = gethostbyname(argv[1]);
-    if (server == NULL) {
-        fprintf(stderr, "Error, no such host\n");
-        return 2;
-    }
-
-    memset(&serv_addr, 0, sizeof(serv_addr));
-    serv_addr.sin_family = AF_INET;
-    memcpy(&serv_addr.sin_addr, server->h_addr, server->h_length);
-    serv_addr.sin_port = htons(atoi(argv[2]));
-
-    sockfd = socket(AF_INET, SOCK_STREAM, 0);
-    if (sockfd < 0) {
-        perror("Error creating socket");
-        return 3;
-    }
-
-    if (connect(sockfd, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0) {
-        perror("Error connecting to socket");
-        return 4;
-    }
-
-    printf("Connected to the Langton server.\n");*/
 }

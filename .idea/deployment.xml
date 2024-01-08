@@ -5,12 +5,8 @@
       <paths name="frios2 (9c320a4d-cc90-4acb-b4d7-d3a16f06ccc4)">
         <serverdata>
           <mappings>
-            <mapping deploy="/tmp/tmp.nzNHrU8Lju" local="$PROJECT_DIR$" />
+            <mapping local="$PROJECT_DIR$" web="/" />
           </mappings>
-          <excludedPaths>
-            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug" />
-            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug" />
-          </excludedPaths>
         </serverdata>
       </paths>
     </serverData>
