@@ -37,12 +37,12 @@ void *antThread(void *arg) {
                 if (input == 'y' || input == 'Y') {
                     break;
                 } else if (input == 'n' || input == 'N') {
-                    printf("Do you wish to save the world? [y/Y] [n/N]\n");
+                    printf("Do you wish to save the world to local file? [y/Y] [n/N]\n");
                     while (1) {
                         scanf(" %c", &input);
                         if (input == 'y' || input == 'Y') {
                             printf("Saving..\n");
-                            saveWorldToFile(world, "world.txt");
+                            saveWorldToFile(world, "world.txt");      // Uloženie do lokálneho súboru
                             exit(EXIT_SUCCESS);
                         } else if (input == 'n' || input == 'N') {
                             printf("Ending simulation..\n");
