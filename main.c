@@ -8,7 +8,7 @@ void create() {
     srand(time(NULL));
 
     World world;
-    world.stepLimit = 1500;
+    world.stepLimit = 10;
 
     pthread_mutex_t ant_mutex;
     pthread_mutex_init(&ant_mutex, NULL);
@@ -95,7 +95,7 @@ void load() {
     srand(time(NULL));
 
     World world;
-    world.stepLimit = 1500;
+    world.stepLimit = 10;
 
     pthread_mutex_t ant_mutex;
     pthread_mutex_init(&ant_mutex, NULL);
@@ -182,7 +182,23 @@ int main(int argc, char *argv[]) {
                 scanf(" %c", &input);
                 if (input == 'y' || input == 'Y') {
                     printf("Saving on server..\n");
-                    //TODO : spojenie so serverom
+                    FILE* worldFile = fopen("world.txt", "rb");
+                    if (worldFile == NULL) {
+                        perror("Error opening world file");
+                        closesocket(sockfd);
+                        WSACleanup();
+                        return 5;
+                    }
+
+                    while ((n = fread(buffer, 1, sizeof(buffer), worldFile)) > 0) {
+                        if (send(sockfd, buffer, n, 0) < 0) {
+                            perror("Error sending world file to the server");
+                            fclose(worldFile);
+                            closesocket(sockfd);
+                            WSACleanup();
+                            return 6;
+                        }
+                    }
                     break;
                 } else if (input == 'n' || input == 'N') {
                     break;
